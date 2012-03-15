@@ -20,7 +20,7 @@
  * @package     ExpressionEngine
  * @subpackage  Addons
  * @category    Extension
- * @author      Cue
+ * @author      CueBit
  * @link        http://cuebit.co.uk/
  */
 class Disable_template_editor
@@ -30,7 +30,7 @@ class Disable_template_editor
   public $version        = '1.0';
   public $description    = 'Disables the EE template editor for users to control templates via source control. This prevents folks from creating out of sync issues between the server and repo.';
   public $settings_exist = 'n';
-  public $docs_url       = '';
+  public $docs_url       = 'https://github.com/cuebit/disable_template_editor';
 
   /**
    * Class constructor
@@ -141,36 +141,13 @@ class Disable_template_editor
     $replace = <<<EOF
 <script type="text/javascript">
   $(function(){
-    // TEMPLATE MANAGER
-    if($('.templatePrefBox').length)
-    {
-      /**
-       * Disables the ability to add/edit/delete templates
-       */
+    if($('.templatePrefBox').length){
       $('.templatePrefBox').find('.itemWrapper').filter(':eq(1),:eq(2),:eq(3)').hide();
-
-      /**
-       * Disables the ability to create a new template group
-       */
       $('.breadcrumbRight > a').hide();
     }
-
-    // TEMPLATE EDITOR
-    if($('#template_data').length)
-    {
-      /**
-       * Force the template editor to be read-only
-       */
+    if($('#template_data').length){
       $('#template_data').attr('readonly','readonly');
-
-      /**
-       * Hide template related arbitrary elements and form actions
-       */
       $('.templatebox, #notes, #noteslink').hide();
-
-      /**
-       * Revisions are redundant, replace with a friendly message
-       */
       $('#revisions')
         .find('.tableHeading:first').text('Read-only. Template in source control ').end()
         .find('.tableHeading:not(:first)').hide();
