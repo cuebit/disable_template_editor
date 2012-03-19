@@ -27,7 +27,7 @@ class Disable_template_editor
 {
   public $settings       = array();
   public $name           = 'Disable Template Editor';
-  public $version        = '1.0';
+  public $version        = '1.0.1';
   public $description    = 'Disables the EE template editor for users to control templates via source control. This prevents folks from creating out of sync issues between the server and repo.';
   public $settings_exist = 'n';
   public $docs_url       = 'https://github.com/cuebit/disable_template_editor';
@@ -141,10 +141,10 @@ class Disable_template_editor
     $replace = <<<EOF
 <script type="text/javascript">
   $(function(){
-    if($('.templatePrefBox').length){
-      $('.templatePrefBox').find('.itemWrapper').filter(':eq(1),:eq(2),:eq(3)').hide();
-      $('.breadcrumbRight > a').hide();
-    }
+    $('.templatePrefBox').each(function(){
+      $('.itemWrapper', this).filter(':eq(1),:eq(2),:eq(3)').hide();
+    });
+    if($('.templatePrefBox').length) $('.breadcrumbRight > a').hide();
     if($('#template_data').length){
       $('#template_data').attr('readonly','readonly');
       $('.templatebox, #notes, #noteslink').hide();
